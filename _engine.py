@@ -168,6 +168,7 @@ def execute(cfg: dict) -> None:
             'timeframe'     : TIMEFRAME,
             'data_ini'      : DATA_INI,
             'data_fim'      : DATA_FIM,
+            'allowed_hours' : str(FIXED_PARAMS.get('allowed_hours', [])),
             'params'        : json.dumps(FIXED_PARAMS, cls=_JsonEncoder),
             'total_return'  : metrics.get('total_return'),
             'annual_return' : metrics.get('annual_return'),
