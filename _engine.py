@@ -11,6 +11,8 @@ import importlib
 import datetime
 from pathlib import Path
 
+import pandas as pd
+
 ROOT = Path(__file__).parent
 sys.path.insert(0, str(ROOT))
 
@@ -156,6 +158,29 @@ def execute(cfg: dict) -> None:
             'initial_cash': INITIAL_CASH, 'params': FIXED_PARAMS,
         }, indent=2, cls=_JsonEncoder))
         (run_dir / 'metrics.json').write_text(json.dumps(metrics, indent=2, cls=_JsonEncoder))
+
+        # --- backtest_log.csv ---
+        log_path = ROOT / 'backtest_log.csv'
+        log_row = pd.DataFrame([{
+            'timestamp'     : ts,
+            'strategy'      : STRATEGY,
+            'symbol'        : SYMBOL,
+            'timeframe'     : TIMEFRAME,
+            'data_ini'      : DATA_INI,
+            'data_fim'      : DATA_FIM,
+            'params'        : json.dumps(FIXED_PARAMS, cls=_JsonEncoder),
+            'total_return'  : metrics.get('total_return'),
+            'annual_return' : metrics.get('annual_return'),
+            'sharpe_ratio'  : metrics.get('sharpe_ratio'),
+            'sortino_ratio' : metrics.get('sortino_ratio'),
+            'calmar_ratio'  : metrics.get('calmar_ratio'),
+            'max_drawdown'  : metrics.get('max_drawdown'),
+            'total_trades'  : metrics.get('total_trades'),
+            'win_rate'      : metrics.get('win_rate'),
+            'profit_factor' : metrics.get('profit_factor'),
+        }])
+        log_row.to_csv(log_path, mode='a', header=not log_path.exists(), index=False)
+        print(f'  Log: backtest_log.csv')
 
     # ----------------------------------------------------------
     # MODE: optimize
