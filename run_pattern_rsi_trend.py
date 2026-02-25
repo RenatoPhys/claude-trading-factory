@@ -26,12 +26,12 @@ MODE = 'backtest'
 
 # --- Parametros fixos (modo backtest) -------------------------
 FIXED_PARAMS = dict(
-    sl            = 400,
-    tp            = 1500,
+    sl            = 300,
+    tp            = 850,
     length_rsi    = 9,
-    rsi_low       = 30,
-    rsi_high      = 70,
-    allowed_hours = [10, 11, 16, 17],
+    rsi_low       = 60,
+    rsi_high      = 40,
+    allowed_hours = [9,10,11,12,13,14,15,16,17],
     position_type = 'both',
 )
 
