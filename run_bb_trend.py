@@ -15,8 +15,8 @@ from _engine import execute
 STRATEGY  = 'bb_trend'
 SYMBOL    = 'WIN@N'
 TIMEFRAME = 't5'
-DATA_INI  = '2019-01-01'
-DATA_FIM  = '2026-06-30'
+DATA_INI  = '2026-01-01'
+DATA_FIM  = '2026-03-21'
 DAYTRADE  = True
 INITIAL_CASH = 30_000
 
@@ -26,11 +26,11 @@ MODE = 'backtest'
 
 # --- Parametros fixos (modo backtest) -------------------------
 FIXED_PARAMS = dict(
-    sl            = 400,
-    tp            = 1500,
-    bb_length     = 20,
-    std           = 2.0,
-    allowed_hours = [9, 10, 11, 12, 13, 14, 15, 16, 17],
+    sl            = 655,
+    tp            = 1971,
+    bb_length     = 11,
+    std           = 2.8,
+    allowed_hours = [11, 13, 14, 16, 17],
     position_type = 'both',
 )
 
